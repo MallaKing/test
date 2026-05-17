@@ -8,7 +8,7 @@ Files added:
 - `requirements.txt`: Python dependencies
 - `.github/workflows/python-ci.yml`: GitHub Actions workflow to run tests
 
-Run locally:11
+Run locally:1111
 
 ```bash
 python -m venv .venv
