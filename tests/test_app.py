@@ -10,7 +10,7 @@ def client():
         yield c
 
 
-def test_health_get(client):
+def test_health_get(client)://
     res = client.get('/health')
     assert res.status_code == 200
     assert res.json.get('status') == 'ok'
