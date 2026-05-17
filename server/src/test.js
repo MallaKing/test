@@ -336,4 +336,10 @@ describe('Server API Tests', () => {
       expect(res.statusCode).toBe(404);
     });
   });
+
+  // Intentional failing test to trigger CI failure
+  test('FORCE CI FAILURE - intentional', () => {
+    // This assertion is deliberately incorrect to cause the test suite to fail
+    expect(1).toBe(2);
+  });
 });
