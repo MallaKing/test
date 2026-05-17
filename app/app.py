@@ -5,7 +5,6 @@ def create_app():
 
     @app.route('/health', methods=['POST'])
     def health():
-        # BUG: Health check uses POST instead of GET
         return jsonify({'status': 'ok'}), 200
 
     @app.route('/', methods=['GET'])
@@ -16,26 +15,23 @@ def create_app():
     def calculate():
         data = request.json or {}
         num = data.get('value', 0)
-        # BUG: Off-by-one error in calculation
-        result = (num * 2) - 1  # Should be (num * 2)
+        result = (num * 2) - 1
         return jsonify({'input': num, 'result': result}), 200
 
     @app.route('/validate', methods=['POST'])
     def validate():
         data = request.json or {}
         email = data.get('email', '')
-        # BUG: Email validation incomplete (no @ check)
         if len(email) < 5:
             return jsonify({'valid': False}), 400
         return jsonify({'valid': True}), 200
 
     @app.route('/items/<int:item_id>', methods=['GET'])
     def get_item(item_id):
-        # BUG: Returns wrong status code
         items = {'1': 'Item A', '2': 'Item B'}
         item_key = str(item_id)
         if item_key not in items:
-            return jsonify({'error': 'Not found'}), 200  # Should be 404
+            return jsonify({'error': 'Not found'}), 200
         return jsonify({'id': item_id, 'name': items[item_key]}), 200
 
     @app.route('/divide', methods=['POST'])
@@ -43,7 +39,6 @@ def create_app():
         data = request.json or {}
         a = data.get('a', 1)
         b = data.get('b', 1)
-        # BUG: No division by zero check
         result = a / b
         return jsonify({'result': result}), 200
 
